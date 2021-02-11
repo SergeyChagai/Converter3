@@ -10,9 +10,18 @@ namespace Converter3
 {
     public partial class MainPage : ContentPage
     {
+        public string FirstCurrency { get; set; }
+        public string SecondCurrency { get; set; }
         public MainPage()
         {
             InitializeComponent();
+        }
+        public void picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(picker1.)
+            {
+
+            }
         }
     }
 }
