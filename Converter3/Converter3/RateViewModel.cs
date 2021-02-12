@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,79 +13,13 @@ namespace Converter3
 {
     class RateViewModel : INotifyPropertyChanged
     {
-        private string id;
-        private int numCode;
-        private string charCode;
-        private int nominal;
-        private string name;
-        private float value;
-        public string Id
-        {
-            get { return id; }
-            set
-            {
-                id = value;
-                OnPropertyChanged("Id");
-            }
-        }
-        public int NumCode
-        {
-            get { return numCode; }
-            set
-            {
-                numCode = value;
-                OnPropertyChanged("NumCode");
-            }
-        }
-        public string CharCode
-        {
-            get { return charCode; }
-            set
-            {
-                charCode = value;
-                OnPropertyChanged("CharCode");
-            }
-        }
-        public int Nominal
-        {
-            get { return nominal; }
-            set
-            {
-                nominal = value;
-                OnPropertyChanged("Nominal");
-            }
-        }
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-        public float Value
-        {
-            get { return this.value; }
-            set
-            {
-                this.value = value;
-                OnPropertyChanged("Value");
-            }
-        }
+        public float FirstCurrencyRate { get; set; }
+        public float SecondCurrencyRate { get; set; }
 
-
-        public ICommand LoadDataCommand { protected set; get; }
-
-        public RateViewModel()
+        public async Task LoadData(string from, string to)
         {
-            this.LoadDataCommand = new Command(LoadData);
-        }
-
-        private async void LoadData()
-        {
-            string url = "https://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.xchange+where+pair+=+%22USDRUB%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
-
+            string url = "https://currate.ru/api/?get=rates";
+            url += $"&pairs={from}RUB,{to}RUB&key=701ba922f372a74ffd0512f881d8ddfb";
             try
             {
                 HttpClient client = new HttpClient();
@@ -97,14 +32,10 @@ namespace Converter3
                 JObject o = JObject.Parse(content);
 
                 var str = o.SelectToken(@"$.data");
-                var rateInfo = JsonConvert.DeserializeObject<Valute>(str.ToString());
+                var rateInfo = JsonConvert.DeserializeObject<Rate>(str.ToString());
 
-                this.Id = rateInfo.Id;
-                this.NumCode = rateInfo.NumCode;
-                this.CharCode = rateInfo.CharCode;
-                this.Nominal = rateInfo.Nominal;
-                this.Name = rateInfo.Name;
-                this.Value = rateInfo.Value;
+                this.FirstCurrencyRate = rateInfo.FirstCurrencyRate;
+                this.SecondCurrencyRate = rateInfo.SecondCurrencyRate;
             }
             catch (Exception ex)
             { }

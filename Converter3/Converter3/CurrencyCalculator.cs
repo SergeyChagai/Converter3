@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Converter3
 {
@@ -19,6 +20,7 @@ namespace Converter3
 
         private string _connectionString = "https://www.cbr-xml-daily.ru/daily_utf8.xml";
         private Dictionary<string, Valute> _dict;
+        private Rate _rate;
         private CurrencyCalculator()
         {
             _dict = new Dictionary<string, Valute>();
@@ -34,21 +36,30 @@ namespace Converter3
         {
             if (Connectivity.NetworkAccess != NetworkAccess.None)
             {
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync(_connectionString);
-                await GetValutes();
+                await GetValutesOnline();
             }
             else
                 GetValutesOffline();
         }
-        public async Task GetValutes()
-        { 
-            XmlSerializer serializer = new XmlSerializer(typeof(RateInfo));
+        public async Task GetValutesOnline()
+        {
+            RateViewModel rateView = new RateViewModel();
+            rateView.LoadData(FirstCurrency, SecondCurrency);
+            if (!_dict.TryGetValue(FirstCurrency, out Valute valute1))
+            {
+                _dict.Add(FirstCurrency, new Valute { CharCode = FirstCurrency, Value = rateView.FirstCurrencyRate });
+            }
+            if (!_dict.TryGetValue(SecondCurrency, out Valute valute2))
+            {
+                _dict.Add(SecondCurrency, new Valute { CharCode = SecondCurrency, Value = rateView.SecondCurrencyRate });
+            }
 
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.Async = true;
+            //XmlSerializer serializer = new XmlSerializer(typeof(RateInfo));
 
-            XmlReader reader = XmlReader.Create("C:/Users/user/source/repos/Converter3/Converter3/Converter3/Valute.cs", settings);
+            //XmlReaderSettings settings = new XmlReaderSettings();
+            //settings.Async = true;
+
+            //XmlReader reader = XmlReader.Create("C:/Users/user/source/repos/Converter3/Converter3/Converter3/Valute.cs", settings);
 
 
             //List<Valute> list = valCurs.valutes;

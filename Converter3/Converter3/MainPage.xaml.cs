@@ -13,21 +13,18 @@ namespace Converter3
     {
         public string FirstCurrency { get; set; }
         public string SecondCurrency { get; set; }
-        RateViewModel viewModel;
+
         public MainPage()
         {
             InitializeComponent();
-            Connect();
-            viewModel = new RateViewModel();
-            // установка контекста данных
-            this.BindingContext = viewModel;
+           
         }
-        private async void Connect()
+        private async Task Connect()
         {
             CurrencyCalculator calculator = CurrencyCalculator.getInstance();
             await calculator.ConnectToServerAsync();
         }
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(FirstCurrency) || String.IsNullOrEmpty(SecondCurrency))
             {
@@ -38,6 +35,7 @@ namespace Converter3
                 CurrencyCalculator calculator = CurrencyCalculator.getInstance();
                 calculator.FirstCurrency = FirstCurrency;
                 calculator.SecondCurrency =  SecondCurrency;
+                await Connect();
                 Navigation.PushModalAsync(new Page1(FirstCurrency, SecondCurrency));
             }
         }

@@ -8,10 +8,10 @@ namespace CalculatorTests
     {
         private CurrencyCalculator calculator;
         [OneTimeSetUp]
-        public async Task SetCalculator()
+        public void SetCalculator()
         {
             calculator = CurrencyCalculator.getInstance();
-            await calculator.ConnectToServerAsync();
+            calculator.ConnectToServerAsync();
         }
 
         [TestCase(1)]
