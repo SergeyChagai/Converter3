@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Converter3.Page1">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="Currency Converter" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            <Label x:Name="firstCurrency" 
+                   Text="How many "
+                   FontSize="Title" 
+                   Padding="30,10,30,10" 
+                   HorizontalTextAlignment="Start"/>
+            <Entry x:Name="entry1" TextChanged="entry1_TextChanged"/>
+            <Label x:Name="secondCurrency" Text="To" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Start"/>
+            <Entry x:Name="entry2" TextChanged="entry2_TextChanged"/>
+            
+            <Button Text="Apply" HorizontalOptions="Center" BackgroundColor="#2196F3" TextColor="#FFFFFF" Clicked="Button_Clicked"/>
+            <Label x:Name="result" FontSize="32" Padding="30,10" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

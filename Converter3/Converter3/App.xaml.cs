@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +16,9 @@ namespace Converter3
 
         protected override void OnStart()
         {
+            base.OnStart();
+            MainPage mainPage = (MainPage)MainPage;     // вот это очень странная строка, но оставлю пока так ахаха
+            mainPage.CheckConnection();
         }
 
         protected override void OnSleep()
@@ -24,5 +28,6 @@ namespace Converter3
         protected override void OnResume()
         {
         }
+        
     }
 }
