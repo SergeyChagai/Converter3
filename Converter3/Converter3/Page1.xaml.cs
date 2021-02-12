@@ -14,8 +14,7 @@ namespace Converter3
     {
         public string FirstCurrency { get; set; }
         public string SecondCurrency { get; set; }
-        public int FirstValue { get; set; }
-        public int SecondValue { get; set; }
+        public int Value { get; set; }
         public Page1(string from, string to)
         {
             InitializeComponent();
@@ -27,17 +26,22 @@ namespace Converter3
 
         private void entry1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FirstValue = Convert.ToInt32(entry1.Text);
-        }
-
-        private void entry2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            SecondValue = Convert.ToInt32(entry1.Text);
+            Value = Convert.ToInt32(entry1.Text);
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            //result.Text = 
+            if(String.IsNullOrEmpty(entry1.Text) || String.IsNullOrEmpty(entry1.Text))
+            {
+                DisplayAlert("Ошибка", "Введите номинал", "OK");
+            }
+            else
+            {
+                CurrencyCalculator calculator = CurrencyCalculator.getInstance();
+                calculator.Value = Value;
+                float reponse = calculator.Calculate();
+                result.Text = Convert.ToString(reponse);
+            }
         }
     }
 }

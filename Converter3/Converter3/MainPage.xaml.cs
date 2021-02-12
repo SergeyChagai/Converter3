@@ -16,9 +16,14 @@ namespace Converter3
         public MainPage()
         {
             InitializeComponent();
+            Connect();
         }
-     
-        public void Button_Clicked(object sender, EventArgs e)
+        private async void Connect()
+        {
+            CurrencyCalculator calculator = CurrencyCalculator.getInstance();
+            await calculator.ConnectToServerAsync();
+        }
+        private void Button_Clicked(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(FirstCurrency) || String.IsNullOrEmpty(SecondCurrency))
             {
@@ -26,6 +31,9 @@ namespace Converter3
             }
             else
             {
+                CurrencyCalculator calculator = CurrencyCalculator.getInstance();
+                calculator.FirstCurrency = FirstCurrency;
+                calculator.SecondCurrency =  SecondCurrency;
                 Navigation.PushModalAsync(new Page1(FirstCurrency, SecondCurrency));
             }
         }
@@ -46,6 +54,21 @@ namespace Converter3
                 errorLabel.Text = "Подключение отсутствует";
             }
             else errorLabel.Text = "OK";
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(FirstCurrency) || String.IsNullOrEmpty(SecondCurrency))
+            {
+                DisplayAlert("Ошибка", "Выберите валюты", "OK");
+            }
+            else
+            {
+                CurrencyCalculator calculator = CurrencyCalculator.getInstance();
+                calculator.FirstCurrency = FirstCurrency;
+                calculator.SecondCurrency = SecondCurrency;
+                Navigation.PushModalAsync(new Page1(FirstCurrency, SecondCurrency));
+            }
         }
     }
 }

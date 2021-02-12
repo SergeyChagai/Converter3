@@ -14,7 +14,6 @@
                    HorizontalTextAlignment="Start"/>
             <Entry x:Name="entry1" TextChanged="entry1_TextChanged"/>
             <Label x:Name="secondCurrency" Text="To" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Start"/>
-            <Entry x:Name="entry2" TextChanged="entry2_TextChanged"/>
             
             <Button Text="Apply" HorizontalOptions="Center" BackgroundColor="#2196F3" TextColor="#FFFFFF" Clicked="Button_Clicked"/>
             <Label x:Name="result" FontSize="32" Padding="30,10" HorizontalTextAlignment="Center"/>
