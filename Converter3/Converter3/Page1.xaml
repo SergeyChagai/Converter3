@@ -17,6 +17,7 @@
             
             <Button Text="Apply" HorizontalOptions="Center" BackgroundColor="#2196F3" TextColor="#FFFFFF" Clicked="Button_Clicked"/>
             <Label x:Name="result" FontSize="32" Padding="30,10" HorizontalTextAlignment="Center"/>
+            <Button Text="Получить курс" Command="{Binding LoadDataCommand}"  />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

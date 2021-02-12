@@ -28,6 +28,7 @@
         <Label x:Name="result" FontSize="32" Padding="30,10" HorizontalTextAlignment="Center"/>
         <Button Text="Apply" HorizontalOptions="Center" BackgroundColor="#2196F3" TextColor="#FFFFFF" Clicked="Button_Clicked"/>
         <Label x:Name="errorLabel" Padding="0,20,0,0" HorizontalTextAlignment="Center" IsVisible="False" />
+        <Button Text="Получить курс" Command="{Binding LoadDataCommand}"  />
     </StackLayout>
 
 </ContentPage>

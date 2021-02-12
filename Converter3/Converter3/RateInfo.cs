@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Converter3
 {
-    public class ValCurs
+    public class RateInfo
     {
-        public List<Valute> valutes { get; set; }
+        public List<Valute> Rate { get; set; }
     }
 }

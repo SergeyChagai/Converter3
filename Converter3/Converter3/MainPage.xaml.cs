@@ -13,10 +13,14 @@ namespace Converter3
     {
         public string FirstCurrency { get; set; }
         public string SecondCurrency { get; set; }
+        RateViewModel viewModel;
         public MainPage()
         {
             InitializeComponent();
             Connect();
+            viewModel = new RateViewModel();
+            // установка контекста данных
+            this.BindingContext = viewModel;
         }
         private async void Connect()
         {

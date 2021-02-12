@@ -15,9 +15,15 @@ namespace Converter3
         public string FirstCurrency { get; set; }
         public string SecondCurrency { get; set; }
         public int Value { get; set; }
+        RateViewModel viewModel;
         public Page1(string from, string to)
         {
             InitializeComponent();
+
+            viewModel = new RateViewModel();
+            // установка контекста данных
+            this.BindingContext = viewModel;
+
             FirstCurrency = from;
             SecondCurrency = to;
             firstCurrency.Text += FirstCurrency;

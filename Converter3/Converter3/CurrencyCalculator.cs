@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using Xamarin.Essentials;
 
 namespace Converter3
 {
@@ -31,13 +32,18 @@ namespace Converter3
         }
         public async Task ConnectToServerAsync()
         {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(_connectionString);
-            GetValutesOffline();
+            if (Connectivity.NetworkAccess != NetworkAccess.None)
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(_connectionString);
+                await GetValutes();
+            }
+            else
+                GetValutesOffline();
         }
         public async Task GetValutes()
         { 
-            XmlSerializer serializer = new XmlSerializer(typeof(ValCurs));
+            XmlSerializer serializer = new XmlSerializer(typeof(RateInfo));
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.Async = true;
