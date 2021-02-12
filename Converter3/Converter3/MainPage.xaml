@@ -5,20 +5,29 @@
 
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Label Text="Currency Converter" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+        <Label x:Name="firstCurrency" Text="What to convert" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Start"/>
+        <Picker x:Name="picker1" SelectedIndexChanged="picker1_SelectedIndexChanged" HorizontalTextAlignment="Center">
+            <Picker.Items>
+                <x:String>RUB</x:String>
+                <x:String>USD</x:String>
+                <x:String>EUR</x:String>
+                <x:String>JPY</x:String>
+            </Picker.Items>
+        </Picker> 
+        <Label x:Name="secondCurrency" Text="Convert to" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Start"/>
+        <Picker x:Name="picker2" SelectedIndexChanged="picker2_SelectedIndexChanged" HorizontalTextAlignment="Center" >
+            <Picker.Items>
+                <x:String>RUB</x:String>
+                <x:String>USD</x:String>
+                <x:String>EUR</x:String>
+                <x:String>JPY</x:String>
+            </Picker.Items>
+        </Picker>
+        <Label x:Name="result" FontSize="32" Padding="30,10" HorizontalTextAlignment="Center"/>
+        <Button Text="Apply" HorizontalOptions="Center" BackgroundColor="#2196F3" TextColor="#FFFFFF" Clicked="Button_Clicked"/>
+        <Label x:Name="errorLabel" Padding="0,20,0,0" HorizontalTextAlignment="Center" IsVisible="False" />
     </StackLayout>
 
 </ContentPage>
