@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Converter3
@@ -27,24 +29,86 @@ namespace Converter3
                 instance = new CurrencyCalculator();
             return instance;
         }
-        public async System.Threading.Tasks.Task ConnectToServerAsync()
+        public async Task ConnectToServerAsync()
         {
-            HttpClient client = new HttpClient(); 
+            HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(_connectionString);
-            XmlSerializer serializer = new XmlSerializer(typeof(Valute));
-            ValCurs valCurs = (ValCurs)serializer.Deserialize(await response.Content.ReadAsStreamAsync());
-            List<Valute> list = valCurs.valutes;
-            foreach (Valute valute in list)
-            {
-                _dict.Add(valute.CharCode, valute);
-            }
+            GetValutesOffline();
         }
+        public async Task GetValutes()
+        { 
+            XmlSerializer serializer = new XmlSerializer(typeof(ValCurs));
+
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.Async = true;
+
+            XmlReader reader = XmlReader.Create("C:/Users/user/source/repos/Converter3/Converter3/Converter3/Valute.cs", settings);
+
+
+            //List<Valute> list = valCurs.valutes;
+            //foreach (Valute valute in list)
+            //{
+            //    _dict.Add(valute.CharCode, valute);
+            //}
+        }
+        public void GetValutesOffline()
+        {
+            _dict.Add(
+                "RUB",
+                new Valute
+                {
+                    Id = "R01235",
+                    NumCode = 0,
+                    CharCode = "RUB",
+                    Nominal = 1,
+                    Name = "Российский рубль",
+                    Value = (float)1
+                }
+                );
+            _dict.Add(
+                "USD",
+                new Valute
+                {
+                    Id = "R01235",
+                    NumCode = 840,
+                    CharCode = "USD",
+                    Nominal = 1,
+                    Name = "Доллар США",
+                    Value = (float)73.9378
+                }
+                );
+            _dict.Add(
+                "EUR",
+                new Valute
+                {
+                    Id = "R01239",
+                    NumCode = 978,
+                    CharCode = "EUR",
+                    Nominal = 1,
+                    Name = "Евро",
+                    Value = (float)89.6052
+                }
+                );
+            _dict.Add(
+                "JPY",
+                new Valute
+                {
+                    Id = "R01820",
+                    NumCode = 392,
+                    CharCode = "JPY",
+                    Nominal = 100,
+                    Name = "Японских иен",
+                    Value = (float)70.4337
+                }
+                );
+        }
+
         public float Calculate()
         {
             Valute from = _dict[FirstCurrency];
             Valute to = _dict[SecondCurrency];
 
-            float result = Value * from.Nominal * to.Value / (to.Nominal * from.Value);
+            float result = Value * to.Nominal * from.Value / (from.Nominal * to.Value);
             return result;
         }
     }

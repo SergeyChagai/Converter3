@@ -12,9 +12,6 @@ namespace Converter3
         public string CharCode { get; set; }
         public int Nominal { get; set; }
         public string Name { get; set; }
-        public int Value { get; set; }
-        public Valute()
-        {
-        }
+        public float Value { get; set; }
     }
 }

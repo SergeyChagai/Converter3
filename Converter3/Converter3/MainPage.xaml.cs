@@ -40,12 +40,12 @@ namespace Converter3
 
         private void picker1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FirstCurrency = firstCurrency.Text;
+            FirstCurrency = Convert.ToString(picker1.SelectedItem);
         }
 
         private void picker2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SecondCurrency = secondCurrency.Text;
+            SecondCurrency = Convert.ToString(picker2.SelectedItem);
         }
         public void CheckConnection()
         {
@@ -54,21 +54,6 @@ namespace Converter3
                 errorLabel.Text = "Подключение отсутствует";
             }
             else errorLabel.Text = "OK";
-        }
-
-        private void Button_Clicked_1(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(FirstCurrency) || String.IsNullOrEmpty(SecondCurrency))
-            {
-                DisplayAlert("Ошибка", "Выберите валюты", "OK");
-            }
-            else
-            {
-                CurrencyCalculator calculator = CurrencyCalculator.getInstance();
-                calculator.FirstCurrency = FirstCurrency;
-                calculator.SecondCurrency = SecondCurrency;
-                Navigation.PushModalAsync(new Page1(FirstCurrency, SecondCurrency));
-            }
         }
     }
 }

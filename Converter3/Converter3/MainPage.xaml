@@ -8,7 +8,7 @@
             <Label Text="Currency Converter" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
         <Label x:Name="firstCurrency" Text="What to convert" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Start"/>
-        <Picker x:Name="picker1" SelectedIndexChanged="picker1_SelectedIndexChanged" HorizontalTextAlignment="End">
+        <Picker x:Name="picker1" SelectedIndexChanged="picker1_SelectedIndexChanged" HorizontalTextAlignment="Center">
             <Picker.Items>
                 <x:String>RUB</x:String>
                 <x:String>USD</x:String>
@@ -17,7 +17,7 @@
             </Picker.Items>
         </Picker> 
         <Label x:Name="secondCurrency" Text="Convert to" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Start"/>
-        <Picker x:Name="picker2" SelectedIndexChanged="picker2_SelectedIndexChanged" HorizontalTextAlignment="End" >
+        <Picker x:Name="picker2" SelectedIndexChanged="picker2_SelectedIndexChanged" HorizontalTextAlignment="Center" >
             <Picker.Items>
                 <x:String>RUB</x:String>
                 <x:String>USD</x:String>
@@ -27,7 +27,7 @@
         </Picker>
         <Label x:Name="result" FontSize="32" Padding="30,10" HorizontalTextAlignment="Center"/>
         <Button Text="Apply" HorizontalOptions="Center" BackgroundColor="#2196F3" TextColor="#FFFFFF" Clicked="Button_Clicked"/>
-        <Label x:Name="errorLabel" Padding="0,20,0,0" HorizontalTextAlignment="Center" />
+        <Label x:Name="errorLabel" Padding="0,20,0,0" HorizontalTextAlignment="Center" IsVisible="False" />
     </StackLayout>
 
 </ContentPage>

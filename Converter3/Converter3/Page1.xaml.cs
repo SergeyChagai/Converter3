@@ -26,17 +26,21 @@ namespace Converter3
 
         private void entry1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Value = Convert.ToInt32(entry1.Text);
+            Value = Convert.ToInt32(entry.Text);
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(entry1.Text) || String.IsNullOrEmpty(entry1.Text))
+            if(String.IsNullOrEmpty(entry.Text))
             {
                 DisplayAlert("Ошибка", "Введите номинал", "OK");
             }
-            else
+            if (Convert.ToInt32(entry.Text) < 0)
             {
+                DisplayAlert("Ошибка", "Ddtlbnt положительное число", "OK");
+            }
+            else
+                    {
                 CurrencyCalculator calculator = CurrencyCalculator.getInstance();
                 calculator.Value = Value;
                 float reponse = calculator.Calculate();
